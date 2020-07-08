@@ -95,7 +95,7 @@ def pred(dataURL):
 
 
 def main():
-    app.run(host="localhost", port=3001, debug=True)
+    app.run(host="0.0.0.0", port=80, debug=True)
 
 
 if __name__ == "__main__":
