@@ -18,13 +18,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <!-- FontAwesome JS -->
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
-      integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
-      crossorigin="anonymous"
-    ></script>
+
   </head>
   <script type="text/javascript">
     var canvas,
@@ -78,10 +72,9 @@
         "touchstart",
         function (e) {
           e.preventDefault();
-          e.stopPropagation();
           this.down = true;
-          this.X = e.touches[0].pageX;
-          this.Y = e.touches[0].pageY;
+          this.X = e.touches[0].pageX -canvas.offsetLeft;
+          this.Y = e.touches[0].pageY - canvas.offsetTop;
         },
         0
       );
@@ -101,13 +94,14 @@
             with (ctx) {
               beginPath();
               moveTo(this.X, this.Y);
-              lineTo(e.touches[0].pageX, e.touches[0].pageY);
+              lineTo(e.touches[0].pageX-canvas.offsetLeft, e.touches[0].pageY-canvas.offsetTop);
               ctx.lineWidth = 2;
               ctx.strokeStyle = "red";
               stroke();
+              ctx.closePath();
             }
-            this.X = e.touches[0].pageX;
-            this.Y = e.touches[0].pageY;
+            this.X = e.touches[0].pageX-canvas.offsetLeft;
+            this.Y = e.touches[0].pageY-canvas.offsetTop;
           }
         },
         0
